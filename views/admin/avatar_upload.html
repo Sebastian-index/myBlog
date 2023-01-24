@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title%}修改头像{%endblock%}
+{% block head%}
+{%endblock%}
+
+{% block body %}
+<div class="container">
+<form action="/upload/avatar" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="userId" class="form-control" id="userId" value="{{user._id.toString()}}">
+    <input type="file" name="avatar" />
+    <button type="submit">上传</button>
+</form>
+</div>
+
+{% endblock %}

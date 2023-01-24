@@ -1,0 +1,121 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>{%block title%}{%endblock%}</title>
+    <link href="/public/public_node/css/main.css" rel="stylesheet" type="text/css">
+    {% block head%}{%endblock%}
+</head>
+<canvas class="snow-container"></canvas>
+<body>
+
+<style type="text/css">
+    .snow-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100001;}
+</style>
+
+<header>
+    <div class="backimg"><img src="/public/images/冬天头.png" width="1920px" height="220px"></div>
+    <div class="logo"><span></span><a href="/"><img src="/public/images/冬天.png" width="220px" height="105px"></a></div>
+</header>
+
+<nav>
+    <div class="menu">
+        {% if _categoryId =='' %}
+        <a href="/" class="focus">首页</a>
+        {% else %}
+        <a href="/">首页</a>
+        {% endif %}
+
+        {% for u in categories %}
+        {% if _categoryId == u.id %}
+        <a href="/?_categoryId={{u.id}}" class="focus">{{u.username}}</a>
+        {% else %}
+        <a href="/?_categoryId={{u.id}}">{{u.username}}</a>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</nav>
+
+
+
+<main class="clear">
+
+    <div class="mainLeft">
+        {% block body%}{% endblock %}
+    </div>
+    <div class="mainRight">
+
+        {% if user!=null %}
+        <div class="rightBox">
+            <div class="title"><span>{{user.role}}</span></div>
+            <p><span class="colDark">{{user.email}}</span></p>
+            <img src="/uploads/{{user.avatar}}" height="140" width="140"/>
+            {% if user.role == "admin" %}
+
+            <p><span class="colDanger">你好，你是管理员，<a href="/admin/">进入管理</a></span></p>
+            {% else %}
+            <p><span class="colDanger">你好，你是普通用户，<a href="/account/update?userId={{user._id.toString()}}">修改密码</a></span></p>
+
+           {% endif %}
+            <p><span><a href="/upload/avatar?userId={{user._id.toString()}}">修改头像</a></span></p>
+            <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
+
+        </div>
+        {% else %}
+        <div class="rightBox" id="loginBox">
+            <div class="title"><span>登录</span></div>
+            <div class="line"><span class="colDark">邮箱：</span><input type="email" id="username" /><em></em></div>
+            <div class="line"><span class="colDark">密码：</span><input type="password"  id="password"/><em></em></div>
+            <div class="line"><span class="colDark"></span><button id="btnLogin">登 录</button></div>
+            <p class="textRight">还没注册？<a href="javascript:;" id="register" class="colMint">马上注册</a>　
+                <a href="/account/forget" id="forget" class="colMint">忘记密码</a>
+            </p>
+            <p class="colWarning textCenter"></p>
+        </div>
+
+        <div class="rightBox" id="registerBox" style="display: none">
+            <div class="title"><span>注册</span></div>
+            <div class="line"><span class="colDark">邮箱：</span><input type="email" id="email" /></div>
+            <div class="line"><span class="colDark">密码：</span><input  type="password" id="password1" /></div>
+            <div class="line"><span class="colDark">确认：</span><input type="password" id="passwordAgain" /></div>
+            <div class="line"><span class="colDark"></span><button id="btnRegister">注 册</button></div>
+            <p class="textRight">已有账号？<a href="javascript:;" id="login" class="colMint">马上登录</a>
+
+                　</p>
+            <p class="colWarning textCenter"></p>
+        </div>
+        {% endif %}
+
+        <div class="rightBox">
+            <div class="title"><span>友情链接</span></div>
+            {% for a in link %}
+            <p><a href="http://{{a.address}}" target="_blank" class="colDanger">{{a.linkName}}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+
+</main>
+
+<div class="copyright textCenter">Copyright © XULIN.com 版权所有 | 闽ICP备01020546号</div>
+
+
+<script type="text/javascript" src="/public/scripts/jquery-3.6.0.js"></script>
+<script type="text/javascript" src = "/public/scripts/index.js"></script>
+<script>
+    $(function(){
+        $.fn.snow({
+            minSize: 5,		//雪花的最小尺寸
+            maxSize: 20, 	//雪花的最大尺寸
+            newOn: 250		//雪花出现的频率 这个数值越小雪花越多
+        });
+    });
+</script>
+<!--<script type="text/javascript" src = "/public/scripts/three.canvas.js"></script>
+<script type="text/javascript" src = "/public/scripts/snowy.js"></script>
+<script type="text/javascript" src = "/public/scripts/script.js"></script>-->
+<script type="text/javascript" src = "/public/scripts/snow.js"></script>
+</body>
+</html>

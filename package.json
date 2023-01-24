@@ -1,0 +1,25 @@
+{
+  "name": "20190963110_xulin_housework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "f: && cd F:\\Web\\MongoDB\\bin && mongod --dbpath E:\\WebstormProjects\\myWork\\20190963110_XuLin\\db --port 27027",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "XuLin",
+  "license": "ISC",
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "bcryptjs": "^2.4.3",
+    "cookies": "^0.8.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.2",
+    "sharp": "^0.29.3",
+    "swig": "^1.4.2"
+  }
+}

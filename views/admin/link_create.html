@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title%}添加栏目{%endblock%}
+{% block head%}
+{%endblock%}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form method="post" action="/admin/link/create">
+                <div class="form-group">
+                    <label for="linkName">链接名称</label>
+                    <input type="text" name="linkName" class="form-control" id="linkName" placeholder="输入名称">
+                </div>
+                <div class="form-group">
+                    <label for="address">链接地址</label>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="输入地址 ">
+                </div>
+                <div class="form-group">
+                    <label for="order">排序号</label>
+                    <input type="text" name="order" class="form-control" id="order" placeholder="输入序号" value="0">
+                </div>
+                <button type="submit" class="btn btn-default">添加链接</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

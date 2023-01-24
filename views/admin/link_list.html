@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% block title%}首页{%endblock%}
+{% block head%}
+<script type="text/javascript">
+    $(function(){
+        $('.nav>li').eq(5).addClass("active");
+    })
+</script>
+{%endblock%}
+
+{% block body %}
+<div class="container">
+    <a href="/admin/link/create">新增链接</a>
+    <form method="post" action="/admin/link/search" >
+        <label for = "linkName">链接名称</label>
+        <input type="text" id ="linkName" name="linkName" class="form-control" placeholder="输入链接名称"/>
+        <button class="btn btn-default" type="submit">查询</button>
+
+        <table class="table table-bordered">
+            <tr class="warning">
+            <tr>
+                <th>ID</th>
+                <th>链接名</th>
+                <th>链接网址</th>
+                <th>创建时间</th>
+                <th>优先级</th>
+                <th>创建人</th>
+                <th>管理</th>
+
+            </tr>
+            {% for u in linkdata %}
+            <tr class="success">
+                <td>{{u._id.toString()}}</td>
+                <td>{{u.linkName}}</td>
+                <td>{{u.address}}</td>
+                <td>{{u.createdAt.toString()|date('Y年m月d日 H:i:s',-8*60)}}</td>
+                <td>{{u.order}}</td>
+                <td>{{u._userId.email}}</td>
+                <td>
+                    <a href="/admin/link/delete?linkId={{u._id.toString()}}">删除</a><!--还有别的方案 //todo: 如/account/update/{{u._id.toString()}}-->
+                    <a href="/admin/link/update?linkId={{u._id.toString()}}">编辑</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+    </form>
+
+
+
+
+
+    <table class="table table-bordered">
+        <tr class="warning">
+        <tr>
+        <th>ID</th>
+        <th>链接名</th>
+        <th>链接网址</th>
+        <th>创建时间</th>
+        <th>优先级</th>
+        <th>创建人</th>
+        <th>管理</th>
+
+    </tr>
+        {% for u in link %}
+        <tr class="success">
+            <td>{{u._id.toString()}}</td>
+            <td>{{u.linkName}}</td>
+            <td>{{u.address}}</td>
+            <td>{{u.createdAt.toString()|date('Y年m月d日 H:i:s',-8*60)}}</td>
+            <td>{{u.order}}</td>
+            <td>{{u._userId.email}}</td>
+            <td>
+                <a href="/admin/link/delete?linkId={{u._id.toString()}}">删除</a><!--还有别的方案 //todo: 如/account/update/{{u._id.toString()}}-->
+                <a href="/admin/link/update?linkId={{u._id.toString()}}">编辑</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous"><a href="/admin/link/list?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li>一共{{count}}数据，每页{{limit}}条，一共{{pages}}页，当前{{page}}页。</li>
+            <li class="next"><a href="/admin/link/list?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

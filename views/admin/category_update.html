@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title%}更新栏目{%endblock%}
+{% block head%}
+{%endblock%}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form method="post" action="/admin/category/update">
+                <input type="hidden" name="categoryId" class="form-control" id="categoryId" value="{{categories._id.toString()}}">
+                <div class="form-group">
+                    <label for="categoryName">栏目名称</label>
+                    <input type="text" name="categoryName" class="form-control" id="categoryName" value="{{categories.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="order">排序号</label>
+                    <input type="text" name="order" class="form-control" id="order" value="{{categories.order}}">
+                </div>
+                <button type="submit" class="btn btn-default">更新</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

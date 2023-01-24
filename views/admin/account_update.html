@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title%}登录页{%endblock%}
+{% block head%}
+{%endblock%}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+      <form method="post" action="/account/update">
+        <div class="form-group">
+          <input type="hidden" name="userId" class="form-control" id="userId" value="{{user._id.toString()}}">
+          <label for="exampleInputEmail1">Email账号</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{user.email}}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">密码</label>
+          <input type="text" name="password" class="form-control" id="exampleInputPassword1" value="{{user.password}}" >
+        </div>
+        <button type="submit" class="btn btn-default">修改</button>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title%}首页{%endblock%}
+{% block body %}
+{% for c in blogs %}
+<div class="listBox">
+    <h1>{{c.title}}</h1>
+    <p class="colDefault">
+        栏目：<span class="colInfo">{{c._categoryId.username}}</span> -
+        作者：<span class="colInfo">{{c._userId.email}}</span> -
+        时间：<span class="colInfo">{{c.createdAt.toString()|date('Y年m月d日 H:i:s',-8*60)}}</span> -
+        阅读：<span class="colInfo">{{c.pv}}</span> -
+        评论：<span class="colInfo">{{c.comment.length}}</span>
+    </p>
+    <dfn><p>{{c.abstract}}</p></dfn>
+    <div class="function"><a href="/view/{{c._id.toString()}}">阅读全文</a></div>
+</div>
+{% endfor %}
+
+
+<div class="pager">
+    <ul class="clear">
+
+        <li class="previous">
+            {% if page <=1 %}
+            <span>没有上一页</span>
+            {% else %}
+            <a href="?_categoryId={{_categoryId}}&page={{page-1}}">上一页</a>
+            {% endif %}
+
+        </li>
+        {% if pages>0 %}
+        <li>
+            <strong>一共{{count}}条数据，每页仅显示{{limit}}条，一共{{pages}}页，当前{{page}}页。</strong>
+        </li>
+        {% else %}
+        {% endif %}
+
+
+        <li class="next">
+            {% if page >=pages%}
+            <span>没有下一页</span>
+            {% else %}
+            <a href="?_categoryId={{_categoryId}}&page={{page+1}}">下一页</a>
+            {% endif %}
+        </li>
+
+    </ul>
+</div>
+{% endblock %}

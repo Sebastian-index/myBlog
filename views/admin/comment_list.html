@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title%}首页{%endblock%}
+{% block head%}
+<script type="text/javascript">
+    $(function(){
+        $('.nav>li').eq(4).addClass("active");
+    })
+</script>
+{%endblock%}
+
+{% block body %}
+<div class="container">
+    <table class="table table-bordered">
+        <tr class="warning">
+        <tr>
+            <th>栏目分类</th>
+            <th>文章名字</th>
+            <th>评论数</th>
+            <th>管理</th>
+
+        </tr>
+        {% for b in blog %}
+        <tr class="success">
+            <td>{{b._categoryId.username}}</td>
+            <td>{{b.title}}</td>
+            <td>{{b.comment.length}}</td>
+            <td>
+               <!-- <a href="/admin/comment/delete?blogId={{b._id.toString()}}">删除</a>&lt;!&ndash;还有别的方案 //todo: 如/account/update/{{u._id.toString()}}&ndash;&gt;
+                <a href="/admin/comment/update?blogId={{b._id.toString()}}">编辑</a>-->
+                <a id="#blogId" href="/admin/comment/detail?blogId={{b._id.toString()}}">进入评论审核</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous"><a href="/admin/comment/list?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li>一共{{count}}数据，每页{{limit}}条，一共{{pages}}页，当前{{page}}页。</li>
+            <li class="next"><a href="/admin/comment/list?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

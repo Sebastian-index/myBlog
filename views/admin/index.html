@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title%}首页{%endblock%}
+{% block head%}
+<script type="text/javascript">
+  $(function(){
+    $('.nav>li').eq(0).addClass("active");
+  })
+</script>
+{%endblock%}
+
+{% block body %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>管理员模式</h1>
+    <p>...</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  </div>
+</div>
+{% endblock %}
+
+

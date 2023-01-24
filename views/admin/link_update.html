@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title%}更新栏目{%endblock%}
+{% block head%}
+{%endblock%}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form method="post" action="/admin/link/update">
+                <input type="hidden" name="linkId" class="form-control" id="linkId" value="{{link._id.toString()}}">
+                <div class="form-group">
+                    <label for="linkName">链接名称</label>
+                    <input type="text" name="linkName" class="form-control" id="linkName" value="{{link.linkName}}">
+                </div>
+                <div class="form-group">
+                    <label for="address">链接地址</label>
+                    <input type="text" name="address" class="form-control" id="address" value="{{link.address}}">
+                </div>
+                <div class="form-group">
+                    <label for="order">排序号</label>
+                    <input type="text" name="order" class="form-control" id="order" value="{{link.order}}">
+                </div>
+                <button type="submit" class="btn btn-default">修改链接</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title%}操作提示{%endblock%}
+{% block head%}
+{%endblock%}
+{% block body %}
+<div class="container">
+    <div class="alert alert-success" role="alert">{{msg}}</div>
+    <a href={{url}}>返回该模块</a>
+</div>
+{% endblock %}

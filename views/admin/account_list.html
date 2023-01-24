@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% block title%}首页{%endblock%}
+{% block head%}
+<script type="text/javascript">
+  $(function(){
+    $('.nav>li').eq(1).addClass("active");
+  })
+</script>
+{%endblock%}
+
+{% block body %}
+<div class="container">
+    <a href="/account/register">添加账号</a>
+    <form method="post" action="/admin/account/search" >
+        <label for = "email">邮箱</label>
+        <input type="text" id ="email" name="email" class="form-control" placeholder="输入邮箱"/>
+        <button class="btn btn-default" type="submit">查询</button>
+        <table class="table table-bordered">
+            <tr class="warning">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>注册时间</th>
+                <th>身份</th>
+                <th>管理</th>
+
+            </tr>
+            {% for u in email1 %}
+            <tr class="success">
+                <td>{{u._id.toString()}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.password}}</td>
+                <td>{{u.createdAt.toString()|date('Y年m月d日 H:i:s',-8*60)}}</td>
+                <td>{{u.role}}</td>
+                <td>
+
+                    <a href="/admin/account/delete?userId={{u.id.toString()}}">删除</a><!--还有别的方案 //todo: 如/account/update/{{u._id.toString()}}-->
+                    <a href="/account/update?userId={{u._id.toString()}}">编辑</a>
+                </td>
+
+            </tr>
+
+            {% endfor %}
+        </table>
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-bordered">
+        <tr class="warning">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>注册时间</th>
+             <th>身份</th>
+            <th>管理</th>
+
+        </tr>
+        {% for u in users %}
+        <tr class="success">
+            <td>{{u._id.toString()}}</td>
+            <td>{{u.username}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.password}}</td>
+            <td>{{u.createdAt.toString()|date('Y年m月d日 H:i:s',-8*60)}}</td>
+            <td>{{u.role}}</td>
+            <td>
+
+                <a href="/admin/account/delete?userId={{u.id.toString()}}">删除</a><!--还有别的方案 //todo: 如/account/update/{{u._id.toString()}}-->
+                <a href="/account/update?userId={{u._id.toString()}}">编辑</a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    {% include 'page.html' %}
+
+</div>
+{% endblock %}
